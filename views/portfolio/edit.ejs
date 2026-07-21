@@ -1,0 +1,11 @@
+<form action="/projects/<%= project._id %>?_method=PUT" method="POST">
+
+    <input
+        type="text"
+        name="projectName"
+        value="<%= project.projectName %>"
+    >
+
+    <button>Update</button>
+
+</form>
