@@ -3,11 +3,15 @@ const router = express.Router();
 
 const Admin = require("../models/admin");
 
+const bcrypt = require("bcrypt");
 
 
+
+// ===============================
 // Login Page
+// ===============================
 
-router.get("/login",(req,res)=>{
+router.get("/login", (req, res) => {
 
     res.render("admin/login");
 
@@ -15,20 +19,27 @@ router.get("/login",(req,res)=>{
 
 
 
+
+
+// ===============================
 // Login Logic
+// ===============================
 
-router.post("/login", async(req,res)=>{
+router.post("/login", async (req, res) => {
 
 
-    const {username,password}=req.body;
+    const { username, password } = req.body;
+
 
 
     const admin = await Admin.findOne({
-        username:username
+        username: username
     });
 
 
-    if(!admin || admin.password !== password){
+
+    if(!admin){
+
 
         req.flash(
             "error",
@@ -42,13 +53,38 @@ router.post("/login", async(req,res)=>{
 
 
 
+    const validPassword = await bcrypt.compare(
+        password,
+        admin.password
+    );
+
+
+
+    if(!validPassword){
+
+
+        req.flash(
+            "error",
+            "Invalid username or password"
+        );
+
+
+        return res.redirect("/admin/login");
+
+    }
+
+
+
+
     req.session.admin = true;
+
 
 
     req.flash(
         "success",
         "Login successful"
     );
+
 
 
     res.redirect("/projects/new");
@@ -58,19 +94,27 @@ router.post("/login", async(req,res)=>{
 
 
 
+
+
+// ===============================
 // Logout
+// ===============================
 
-router.get("/logout",(req,res)=>{
+router.get("/logout", (req, res) => {
 
 
-    req.session.destroy(()=>{
+    req.session.destroy(() => {
+
 
         res.redirect("/");
+
 
     });
 
 
 });
+
+
 
 
 module.exports = router;

@@ -1,7 +1,8 @@
-module.exports.isAdmin = (req,res,next)=>{
+module.exports.isAdmin = (req, res, next) => {
 
 
     if(!req.session.admin){
+
 
         req.flash(
             "error",

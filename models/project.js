@@ -21,7 +21,12 @@ const projectSchema = new Schema({
         type: String,
     },
     image: {
-        type: String,
+    url: {
+        type: String
+    },
+    filename: {
+        type: String
+     }
     },
     featured: {
         type: Boolean,

@@ -20,7 +20,10 @@ module.exports.createProject = async (req, res) => {
         technologies: req.body.technologies.split(","),
         githubLink: req.body.githubLink,
         liveLink: req.body.liveLink,
-        image: req.body.image,
+        image: {
+        url: req.file.path,
+        filename: req.file.filename
+},
         category: req.body.category,
     });
 

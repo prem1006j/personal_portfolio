@@ -1,0 +1,133 @@
+<%- include("../includes/head", { title: "Admin Login" }) %>
+
+<%- include("../includes/navbar") %>
+
+
+<div class="container py-5">
+
+
+    <div class="row justify-content-center">
+
+
+        <div class="col-md-5">
+
+
+            <div class="card shadow">
+
+
+                <div class="card-body">
+
+
+                    <h2 class="text-center mb-4">
+
+                        Admin Login
+
+                    </h2>
+
+
+
+                    <% if(error.length){ %>
+
+                        <div class="alert alert-danger">
+
+                            <%= error %>
+
+                        </div>
+
+                    <% } %>
+
+
+
+                    <% if(success.length){ %>
+
+                        <div class="alert alert-success">
+
+                            <%= success %>
+
+                        </div>
+
+                    <% } %>
+
+
+
+
+
+                    <form action="/admin/login" method="POST">
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Username
+                            </label>
+
+
+                            <input
+
+                            type="text"
+
+                            name="username"
+
+                            class="form-control"
+
+                            placeholder="Enter username"
+
+                            required>
+
+                        </div>
+
+
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+
+                            <input
+
+                            type="password"
+
+                            name="password"
+
+                            class="form-control"
+
+                            placeholder="Enter password"
+
+                            required>
+
+                        </div>
+
+
+
+
+                        <button class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<%- include("../includes/footer") %>

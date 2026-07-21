@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -12,7 +14,7 @@ const contactRoutes = require("./routes/contact");
 const adminRoutes = require("./routes/admin");
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/prem_portfolio";
+const MONGO_URL = process.env.MONGO_URL;
 
 async function main() {
     await mongoose.connect(MONGO_URL);
@@ -29,11 +31,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
     session({
 
-        secret:"portfolioSecret",
+        secret: process.env.SESSION_SECRET,
 
         resave:false,
 
-        saveUninitialized:true
+        saveUninitialized:false
 
     })
 );
@@ -45,11 +47,9 @@ app.use(flash());
 // Flash messages available in all ejs files
 
 app.use((req,res,next)=>{
-
     res.locals.success = req.flash("success");
-
     res.locals.error = req.flash("error");
-
+    res.locals.admin = req.session.admin;
     next();
 
 });

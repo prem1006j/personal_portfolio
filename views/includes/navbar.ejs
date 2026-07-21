@@ -104,14 +104,35 @@
 
                 </li>
 
+                <% if(admin){ %>
 
+            <li class="nav-item">
+
+             <a class="nav-link text-danger" href="/admin/logout">
+
+            Logout
+
+        </a>
+
+        </li>
+
+
+    <% } else { %>
+        <li class="nav-item">
+        <a class="nav-link" href="/admin/login">
+            Admin Login
+        </a>
+    </li>
+
+
+    <% } %>
             </ul>
 
 
+            </div>
+
+
         </div>
-
-
-    </div>
 
 
 </nav>
