@@ -23,7 +23,10 @@ const projectsData = [
         ],
         githubLink: "https://github.com/prem1006j/airbnb-clone",
         liveLink: "",
-        image: "/images/projects/Airbnb.png",
+        image: {
+        url: "/images/projects/Airbnb.png",
+        filename: "local-image"
+        },
         featured: true,
         category: "Full Stack",
     },
@@ -38,7 +41,10 @@ const projectsData = [
         ],
         githubLink: "https://github.com/prem1006j/Simon-Says-Game",
         liveLink: "",
-        image: "/images/projects/simon_Says.png",
+        image: {
+        url: "/images/projects/simon_Says.png",
+        filename: "local-image"
+        },
         featured: false,
         category: "Frontend",
     },
@@ -54,7 +60,10 @@ const projectsData = [
         ],
         githubLink: "",
         liveLink: "",
-        image: "/images/projects/movie_recomendation.png",
+        image: {
+        url: "/images/projects/movie_recomendation.png",
+        filename: "local-image"
+    },
         featured: true,
         category: "AI / ML",
     },
@@ -70,7 +79,10 @@ const projectsData = [
         ],
         githubLink: "",
         liveLink: "",
-        image: "/images/projects/My-e-village.png",
+        image: {
+        url: "/images/projects/My-e-village.png",
+        filename: "local-image"
+        },
         featured: true,
         category: "Web Application",
     }

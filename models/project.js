@@ -2,44 +2,45 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
+
     projectName: {
-        type:String,
-        required: true,
+        type: String,
+        required: true
     },
+
     description: {
         type: String,
-        required: true,
+        required: true
     },
-    technologies:{
-        type: [String],
-        required: true,
-    },
-    githubLink: {
-        type: String,
-    },
-    liveLink: {
-        type: String,
-    },
+
+    technologies: [{
+        type: String
+    }],
+
+    githubLink: String,
+
+    liveLink: String,
+
     image: {
-    url: {
-        type: String
+
+        url: String,
+
+        filename: String
+
     },
-    filename: {
-        type: String
-     }
-    },
+
     featured: {
         type: Boolean,
-        default: false,
+        default: false
     },
-    category: {
-        type: String,
-    },
+
+    category: String,
+
     createdAt: {
-        type : Date,
-        default: Date.now,
-    },
+        type: Date,
+        default: Date.now
+    }
+
 });
 
-const Project = mongoose.model("Project", projectSchema);
-module.exports= Project;
+module.exports = mongoose.model("Project", projectSchema);
