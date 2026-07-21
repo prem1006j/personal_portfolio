@@ -4,8 +4,13 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const methodOverride = require("method-override");
+const session = require("express-session");
+const flash = require("connect-flash");
 const portfolioRoutes = require("./routes/portfolio");
 const projectRoutes = require("./routes/project");
+const contactRoutes = require("./routes/contact");
+const adminRoutes = require("./routes/admin");
+
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/prem_portfolio";
 
@@ -21,10 +26,58 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(
+    session({
+
+        secret:"portfolioSecret",
+
+        resave:false,
+
+        saveUninitialized:true
+
+    })
+);
+
+
+app.use(flash());
+
+
+// Flash messages available in all ejs files
+
+app.use((req,res,next)=>{
+
+    res.locals.success = req.flash("success");
+
+    res.locals.error = req.flash("error");
+
+    next();
+
+});
+
+
+
 app.use("/", portfolioRoutes);
 app.use("/projects", projectRoutes);
+app.use("/contact", contactRoutes);
+app.use("/admin",adminRoutes);
 
-// Your project routes...
+app.all("/*splat", (req, res) => {
+
+    res.status(404).render("error");
+
+});
+
+app.use((err, req, res, next) => {
+
+    console.log(err);
+
+    let { statusCode = 500, message = "Something went wrong" } = err;
+
+
+    res.status(statusCode).send(message);
+
+});
+
 
 main()
     .then(() => {

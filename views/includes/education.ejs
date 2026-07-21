@@ -1,62 +1,131 @@
-    <!-- Education -->
-
-    <section id="education" class="py-5">
+<section id="education" class="py-5" data-aos="fade-right">
 
     <div class="container">
 
-        <h2 class="text-center mb-5">Education</h2>
+        <h2 class="text-center fw-bold mb-5">
+            Education
+        </h2>
 
-        <% education.forEach(edu => { %>
 
-            <div class="card shadow mb-4">
+        <div class="row justify-content-center">
 
-                <div class="card-body">
 
-                    <h4><%= edu.degree %></h4>
+            <% education.forEach(edu => { %>
 
-                    <h5><%= edu.institution %></h5>
 
-                    <p>
-                        <strong>Field:</strong>
-                        <%= edu.fieldOfStudy %>
-                    </p>
+                <div class="col-lg-8 mb-4">
 
-                    <p>
-                        <strong>Duration:</strong>
-                        <%= edu.startYear %> -
-                        <%= edu.endYear %>
-                    </p>
 
-                    <p>
-                        <strong>Grade:</strong>
-                        <%= edu.grade %>
-                    </p>
+                    <div class="card education-card shadow border-0"
+                    data-aos="fade-up">
 
-                    <p>
-                        <strong>Location:</strong>
-                        <%= edu.location %>
-                    </p>
 
-                    <% if(edu.description){ %>
+                        <div class="card-body p-4">
 
-                        <ul>
 
-                            <% edu.description.forEach(item=>{ %>
+                            <div class="d-flex justify-content-between flex-wrap">
 
-                                <li><%= item %></li>
 
-                            <% }) %>
+                                <div>
 
-                        </ul>
+                                    <h3 class="fw-bold">
+                                        <%= edu.degree %>
+                                    </h3>
 
-                    <% } %>
+
+                                    <h5 class="text-primary">
+                                        <%= edu.institution %>
+                                    </h5>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span class="badge bg-dark">
+                                        <%= edu.startYear %> -
+                                        <%= edu.endYear %>
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <hr>
+
+
+
+                            <p>
+                                <strong>Field:</strong>
+                                <%= edu.fieldOfStudy %>
+                            </p>
+
+
+
+                            <p>
+                                📍 <%= edu.location %>
+                            </p>
+
+
+
+                            <% if(edu.grade){ %>
+
+                                <p>
+                                    <strong>Grade:</strong>
+                                    <%= edu.grade %>
+                                </p>
+
+                            <% } %>
+
+
+
+
+                            <% if(edu.description){ %>
+
+                                <h5 class="mt-4">
+                                    Highlights
+                                </h5>
+
+
+                                <ul>
+
+
+                                    <% edu.description.forEach(item => { %>
+
+
+                                        <li>
+                                            <%= item %>
+                                        </li>
+
+
+                                    <% }) %>
+
+
+                                </ul>
+
+
+                            <% } %>
+
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
-            </div>
 
-        <% }) %>
+            <% }) %>
+
+
+        </div>
+
 
     </div>
+
 
 </section>

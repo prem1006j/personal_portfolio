@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const projectController = require("../controllers/project");
+const {isAdmin}=require("../middleware");
 
 router.get("/new", projectController.newProjectForm);
 

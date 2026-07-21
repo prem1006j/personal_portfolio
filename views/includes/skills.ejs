@@ -1,45 +1,66 @@
-    <!-- Skills -->
-
-    <section id="skills" class="py-5">
+<section id="skills" class="py-5" data-aos="fade-up">
 
     <div class="container">
 
-        <h2 class="text-center mb-5">Skills</h2>
+        <h2 class="text-center fw-bold mb-5">
+            My Skills
+        </h2>
+
 
         <div class="row">
 
+
             <% skills.forEach(skill => { %>
 
-                <div class="col-md-4 mb-4">
 
-                    <div class="card h-100 shadow-sm">
+                <div class="col-lg-4 col-md-6 mb-4">
 
-                        <div class="card-body">
 
-                            <h4 class="card-title">
+                    <div class="card skill-card shadow-sm h-100 border-0"
+                    data-aos="flip-up">
+
+                        <div class="card-body text-center">
+
+
+                            <h4 class="fw-bold mb-4">
                                 <%= skill.category %>
                             </h4>
 
-                            <ul>
+
+
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+
 
                                 <% skill.skills.forEach(item => { %>
 
-                                    <li><%= item %></li>
+
+                                    <span class="badge skill-badge">
+                                        <%= item %>
+                                    </span>
+
 
                                 <% }) %>
 
-                            </ul>
+
+                            </div>
+
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
+
             <% }) %>
+
 
         </div>
 
+
     </div>
+
 
 </section>

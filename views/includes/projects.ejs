@@ -1,52 +1,126 @@
-    <!-- Projects -->
-
-    <section id="projects" class="py-5">
+<section id="projects" class="py-5" data-aos="fade-up">
 
     <div class="container">
 
-        <h2 class="text-center mb-5">Projects</h2>
+        <h2 class="text-center fw-bold mb-5">
+            My Projects
+        </h2>
+
 
         <div class="row">
 
+
             <% projects.forEach(project => { %>
+
 
                 <div class="col-lg-6 mb-4">
 
-                    <div class="card h-100 shadow">
 
-                        <img
-                            src="<%= project.image %>"
-                            class="card-img-top"
-                            alt="<%= project.projectName %>">
+                    <div class="card project-card shadow border-0 h-100"
+                    data-aos="zoom-in">
+
+
+                        <!-- Project Image -->
+
+                        <img 
+                        src="<%= project.image %>"
+                        class="card-img-top project-img"
+                        alt="<%= project.projectName %>">
+
+
 
                         <div class="card-body">
 
-                            <h4>
+
+                            <!-- Category -->
+
+                            <span class="badge bg-primary mb-3">
+                                <%= project.category %>
+                            </span>
+
+
+
+                            <!-- Title -->
+
+                            <h3 class="fw-bold">
                                 <%= project.projectName %>
-                            </h4>
+                            </h3>
+
+
+
+                            <!-- Description -->
 
                             <p>
                                 <%= project.description %>
                             </p>
 
-                            <a
-                                href="/projects/<%= project._id %>"
-                                class="btn btn-primary">
+
+
+                            <!-- Technologies -->
+
+                            <div class="mb-3">
+
+
+                                <% project.technologies.forEach(tech => { %>
+
+
+                                    <span class="badge tech-badge">
+                                        <%= tech %>
+                                    </span>
+
+
+                                <% }) %>
+
+
+                            </div>
+
+
+
+                            <!-- Buttons -->
+
+
+                            <a 
+                            href="/projects/<%= project._id %>"
+                            class="btn btn-primary me-2">
 
                                 View Project
 
                             </a>
 
+
+
+                            <% if(project.githubLink){ %>
+
+                                <a 
+                                href="<%= project.githubLink %>"
+                                target="_blank"
+                                class="btn btn-dark">
+
+                                    GitHub
+
+                                </a>
+
+
+                            <% } %>
+
+
+
                         </div>
+
 
                     </div>
 
+
                 </div>
+
 
             <% }) %>
 
+
         </div>
 
+
     </div>
+
 
 </section>

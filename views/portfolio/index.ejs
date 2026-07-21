@@ -1,5 +1,27 @@
 <%- include("../includes/head", { title: "Prem Nikam | Portfolio" }) %>
 
+<% if(success.length){ %>
+
+<div class="alert alert-success text-center">
+
+<%= success %>
+
+</div>
+
+<% } %>
+
+
+
+<% if(error.length){ %>
+
+<div class="alert alert-danger text-center">
+
+<%= error %>
+
+</div>
+
+<% } %>
+
 <%- include("../includes/navbar") %>
 
 <%- include("../includes/hero") %>

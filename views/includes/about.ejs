@@ -1,52 +1,125 @@
-    <!-- About -->
-     <section id="about" class="py-5">
+<section id="about" class="py-5" data-aos="fade-right">
 
     <div class="container">
 
-        <h2 class="text-center mb-5">About Me</h2>
+        <h2 class="text-center fw-bold mb-5">
+            About Me
+        </h2>
 
-        <div class="row">
 
-            <div class="col-lg-6">
+        <div class="row align-items-center">
 
-                <h4>Who am I?</h4>
 
-                <p><%= profile.bio %></p>
+            <!-- About Text -->
+            <div class="col-lg-6 mb-4">
+
+                <h3 class="fw-bold">
+                    Who am I?
+                </h3>
+
+
+                <p class="lead">
+                    <%= profile.bio %>
+                </p>
+
+
+                <p>
+                    I am passionate about building full-stack web applications
+                    and exploring Artificial Intelligence. I enjoy solving
+                    real-world problems through technology and continuously
+                    improving my development skills.
+                </p>
+
 
             </div>
 
+
+
+            <!-- Personal Info Card -->
             <div class="col-lg-6">
 
-                <div class="card shadow">
 
-                    <div class="card-body">
+                <div class="card shadow border-0">
 
-                        <h5>Personal Information</h5>
+                    <div class="card-body p-4">
 
-                        <hr>
 
-                        <p><strong>Name:</strong> <%= profile.name %></p>
+                        <h4 class="fw-bold mb-4">
+                            Personal Information
+                        </h4>
 
-                        <p><strong>Title:</strong> <%= profile.title %></p>
 
-                        <p><strong>Location:</strong> <%= profile.location %></p>
+                        <div class="mb-3">
 
-                        <a href="<%= profile.resume %>"
-                           target="_blank"
-                           class="btn btn-primary">
+                            <strong>Name:</strong>
+
+                            <span>
+                                <%= profile.name %>
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="mb-3">
+
+                            <strong>Role:</strong>
+
+                            <span>
+                                <%= profile.title %>
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="mb-3">
+
+                            <strong>Location:</strong>
+
+                            <span>
+                                <%= profile.location %>
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="mb-3">
+
+                            <strong>Education:</strong>
+
+                            <span>
+                                Computer Engineering
+                            </span>
+
+                        </div>
+
+
+
+                        <a 
+                        href="<%= profile.resume %>"
+                        target="_blank"
+                        class="btn btn-primary">
 
                             Download Resume
 
                         </a>
 
+
+
                     </div>
 
                 </div>
 
+
             </div>
+
 
         </div>
 
+
     </div>
+
 
 </section>
