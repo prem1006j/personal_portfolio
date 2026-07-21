@@ -1,0 +1,60 @@
+    <!-- Experience -->
+     <section id="experience" class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">Experience</h2>
+
+        <% experiences.forEach(exp => { %>
+
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h4><%= exp.role %></h4>
+
+                    <h5><%= exp.companyName %></h5>
+
+                    <p>
+                        <strong>Location:</strong>
+                        <%= exp.location %>
+                    </p>
+
+                    <p>
+                        <strong>Employment:</strong>
+                        <%= exp.employmentType %>
+                    </p>
+
+                    <h5>Responsibilities</h5>
+
+                    <ul>
+
+                        <% exp.description.forEach(desc => { %>
+
+                            <li><%= desc %></li>
+
+                        <% }) %>
+
+                    </ul>
+
+                    <h5>Technologies</h5>
+
+                    <ul>
+
+                        <% exp.technologies.forEach(tech => { %>
+
+                            <li><%= tech %></li>
+
+                        <% }) %>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>

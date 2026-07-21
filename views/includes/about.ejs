@@ -1,0 +1,52 @@
+    <!-- About -->
+     <section id="about" class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">About Me</h2>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <h4>Who am I?</h4>
+
+                <p><%= profile.bio %></p>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="card shadow">
+
+                    <div class="card-body">
+
+                        <h5>Personal Information</h5>
+
+                        <hr>
+
+                        <p><strong>Name:</strong> <%= profile.name %></p>
+
+                        <p><strong>Title:</strong> <%= profile.title %></p>
+
+                        <p><strong>Location:</strong> <%= profile.location %></p>
+
+                        <a href="<%= profile.resume %>"
+                           target="_blank"
+                           class="btn btn-primary">
+
+                            Download Resume
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,45 @@
+    <!-- Skills -->
+
+    <section id="skills" class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">Skills</h2>
+
+        <div class="row">
+
+            <% skills.forEach(skill => { %>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h4 class="card-title">
+                                <%= skill.category %>
+                            </h4>
+
+                            <ul>
+
+                                <% skill.skills.forEach(item => { %>
+
+                                    <li><%= item %></li>
+
+                                <% }) %>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</section>

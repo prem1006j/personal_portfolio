@@ -1,0 +1,62 @@
+    <!-- Education -->
+
+    <section id="education" class="py-5">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">Education</h2>
+
+        <% education.forEach(edu => { %>
+
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h4><%= edu.degree %></h4>
+
+                    <h5><%= edu.institution %></h5>
+
+                    <p>
+                        <strong>Field:</strong>
+                        <%= edu.fieldOfStudy %>
+                    </p>
+
+                    <p>
+                        <strong>Duration:</strong>
+                        <%= edu.startYear %> -
+                        <%= edu.endYear %>
+                    </p>
+
+                    <p>
+                        <strong>Grade:</strong>
+                        <%= edu.grade %>
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        <%= edu.location %>
+                    </p>
+
+                    <% if(edu.description){ %>
+
+                        <ul>
+
+                            <% edu.description.forEach(item=>{ %>
+
+                                <li><%= item %></li>
+
+                            <% }) %>
+
+                        </ul>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>
