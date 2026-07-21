@@ -5,6 +5,7 @@ const Experience = require("../models/experience");
 const Education = require("../models/education");
 
 module.exports.index = async (req, res) => {
+
     const profile = await Profile.findOne({});
     const projects = await Project.find({});
     const skills = await Skill.find({});
@@ -18,12 +19,5 @@ module.exports.index = async (req, res) => {
         experiences,
         education,
     });
-};
 
-module.exports.showProject = async (req, res) => {
-    const { id } = req.params;
-
-    const project = await Project.findById(id);
-
-    res.render("portfolio/show", { project });
 };
