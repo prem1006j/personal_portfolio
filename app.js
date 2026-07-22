@@ -126,12 +126,14 @@ app.use((err, req, res, next) => {
 });
 
 
+const PORT = process.env.PORT || 8080;
+
 main()
     .then(() => {
         console.log("Connected to DB");
 
-        app.listen(8080, () => {
-            console.log("Server is listening on port 8080");
+        app.listen(PORT, () => {
+            console.log(`Server is listening on port ${PORT}`);
         });
     })
     .catch((err) => {
