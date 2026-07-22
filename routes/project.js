@@ -4,7 +4,10 @@ const router = express.Router();
 const Project = require("../models/project");
 
 const { isAdmin } = require("../middleware/auth");
+const { verifyCsrfToken } = require("../middleware/csrf");
 const upload = require("../middleware/upload");
+const cloudinary = require("../config/cloudinary");
+const uploadBufferToCloudinary = require("../utils/cloudinaryUpload");
 
 
 // ===============================
@@ -30,39 +33,46 @@ router.post(
     "/",
     isAdmin,
     upload.single("image"),
-    async (req, res) => {
+    verifyCsrfToken,
+    async (req, res, next) => {
 
-        console.log(req.file);
+        try {
 
-        const project = new Project({
+            const result = await uploadBufferToCloudinary(req.file.buffer);
 
-            projectName: req.body.projectName,
+            const project = new Project({
 
-            description: req.body.description,
+                projectName: req.body.projectName,
 
-            technologies: req.body.technologies.split(","),
+                description: req.body.description,
 
-            githubLink: req.body.githubLink,
+                technologies: req.body.technologies.split(","),
 
-            liveLink: req.body.liveLink,
+                githubLink: req.body.githubLink,
 
-            category: req.body.category,
+                liveLink: req.body.liveLink,
 
-            image: {
+                category: req.body.category,
 
-                url: req.file.path,
+                image: {
 
-                filename: req.file.filename
+                    url: result.secure_url,
 
-            }
+                    filename: result.public_id
 
-        });
+                }
 
-        console.log(project);
+            });
 
-        await project.save();
+            await project.save();
 
-        res.redirect("/");
+            res.redirect("/");
+
+        } catch (err) {
+
+            next(err);
+
+        }
 
     }
 );
@@ -76,20 +86,30 @@ router.post(
 
 router.get("/:id", async (req, res) => {
 
+    try {
 
-    const { id } = req.params;
+        const { id } = req.params;
 
+        const project = await Project.findById(id);
 
-    const project = await Project.findById(id);
-
-
-    res.render(
-        "portfolio/show",
-        {
-            project
+        if (!project) {
+            return res.status(404).render("error");
         }
-    );
 
+        res.render(
+            "portfolio/show",
+            {
+                project
+            }
+        );
+
+    } catch (err) {
+
+        // Invalid ObjectId format lands here — show 404 instead of
+        // leaking a raw Mongoose CastError message to the client.
+        return res.status(404).render("error");
+
+    }
 
 });
 
@@ -134,46 +154,61 @@ router.put(
     "/:id",
     isAdmin,
     upload.single("image"),
-    async (req, res) => {
+    verifyCsrfToken,
+    async (req, res, next) => {
 
-        const { id } = req.params;
+        try {
 
-        const project = await Project.findById(id);
+            const { id } = req.params;
 
-        project.projectName = req.body.projectName;
-        project.description = req.body.description;
-        project.technologies = req.body.technologies.split(",");
-        project.githubLink = req.body.githubLink;
-        project.liveLink = req.body.liveLink;
-        project.category = req.body.category;
+            const project = await Project.findById(id);
 
-        if (req.file) {
+            if (!project) {
+                return res.status(404).render("error");
+            }
 
-            if (project.image.filename) {
+            project.projectName = req.body.projectName;
+            project.description = req.body.description;
+            project.technologies = req.body.technologies.split(",");
+            project.githubLink = req.body.githubLink;
+            project.liveLink = req.body.liveLink;
+            project.category = req.body.category;
 
-                await cloudinary.uploader.destroy(
-                    project.image.filename
-                );
+            if (req.file) {
+
+                if (project.image.filename) {
+
+                    await cloudinary.uploader.destroy(
+                        project.image.filename
+                    );
+
+                }
+
+                const result = await uploadBufferToCloudinary(req.file.buffer);
+
+                project.image = {
+
+                    url: result.secure_url,
+                    filename: result.public_id
+
+                };
 
             }
 
-            project.image = {
+            await project.save();
 
-                url: req.file.path,
-                filename: req.file.filename
+            req.flash(
+                "success",
+                "Project updated successfully!"
+            );
 
-            };
+            res.redirect(`/projects/${id}`);
+
+        } catch (err) {
+
+            next(err);
 
         }
-
-        await project.save();
-
-        req.flash(
-            "success",
-            "Project updated successfully!"
-        );
-
-        res.redirect(`/projects/${id}`);
 
     }
 );
@@ -185,28 +220,41 @@ router.put(
 // Protected
 // ===============================
 
-router.delete("/:id", isAdmin, async (req, res) => {
+router.delete("/:id", isAdmin, verifyCsrfToken, async (req, res, next) => {
 
-    const { id } = req.params;
+    try {
 
-    const project = await Project.findById(id);
+        const { id } = req.params;
 
-    if (project.image && project.image.filename) {
+        const project = await Project.findById(id);
 
-        await cloudinary.uploader.destroy(
-            project.image.filename
+        if (!project) {
+            return res.status(404).render("error");
+        }
+
+        if (project.image && project.image.filename) {
+
+            await cloudinary.uploader.destroy(
+                project.image.filename
+            );
+
+        }
+
+        await Project.findByIdAndDelete(id);
+
+        req.flash(
+            "success",
+            "Project deleted successfully!"
         );
+
+        res.redirect("/");
+
+    } catch (err) {
+
+        next(err);
 
     }
 
-    await Project.findByIdAndDelete(id);
-
-    req.flash(
-        "success",
-        "Project deleted successfully!"
-    );
-
-    res.redirect("/");
 });
 
 

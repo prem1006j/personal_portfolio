@@ -19,6 +19,7 @@
         action="/projects/<%= project._id %>?_method=PUT"
         method="POST"
         enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
         <!-- Project Name -->
         <div class="mb-3">

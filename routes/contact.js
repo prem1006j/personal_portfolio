@@ -4,10 +4,11 @@ const router = express.Router();
 const Contact = require("../models/contact");
 
 const contactSchema = require("../utils/schema");
+const { verifyCsrfToken } = require("../middleware/csrf");
 
 
 
-router.post("/", async(req,res)=>{
+router.post("/", verifyCsrfToken, async(req,res)=>{
 
 
     try {
